@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userEvent">
+	
+	<select id="selectEventList" parameterType="EventVo" resultType="EventVo">
+		SELECT T.* FROM (
+			SELECT @rownum:=@rownum+1 as RN, A.* FROM youdog_event A
+			WHERE (@rownum:=0)=0 ORDER BY reg_date DESC, event_no DESC
+	    ) T
+		WHERE T.RN <![CDATA[>=]]> #{startRow}
+		AND T.RN <![CDATA[<=]]> #{endRow};
+	</select>
+	
+	<select id="selectEventListTotal" resultType="int">
+		SELECT COUNT(*) FROM youdog_event
+	</select>
+	
+</mapper>

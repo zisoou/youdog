@@ -1,0 +1,51 @@
+@charset "UTF-8";
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+
+:root {
+  --bs-primary--: #68A35F;
+  --bs-lightprimary--: #83b37b;
+  --bs-secondary--: #304836;
+  --bs-lightpink--:#fac7b8! important;
+  --bs-pink--:#F7A18B !important ;
+  --bs-pinkk--:#ab9ee4!important ;
+  --bs-middlepink--:#f48468;
+  --bs-darkpink--:#f37252;
+  --bs-darkgray--:#474747;
+  --bs-white--:#f2f2f2;
+  --btn-secondary--: #304836;
+}
+
+.btn-light--{
+	background: var(--bs-white--) !important;
+    color: var(--bs-pink--) !important;
+}
+
+.btn-light--:hover {
+	background: var(--bs-middlepink--) !important;
+    color: var(--bs-white) !important;
+}
+
+.text-pink-- {
+    color: var(--bs-pink--) !important;
+}
+
+.noto-serif kr-regular {
+  font-family: "Noto Serif KR", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+ h6,.h6,h5,.h5,h4,.h4,h3,.h3,h2,.h2,h1,.h1{
+ font-family:"Noto Serif KR" !important;
+
+}
+
+
+
+.btn-light--:hover {
+	background: center/cover url("");
+    
+}

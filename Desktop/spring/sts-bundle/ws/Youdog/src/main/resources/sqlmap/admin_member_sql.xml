@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	<insert id='admininsert'
+		parameterType="com.office.youdog.admin.member.AdminMemberVo"
+		useGeneratedKeys="true" keyProperty="admin_no">
+		insert into admin_member(
+		admin_id,
+		admin_pw,
+		admin_name,
+		admin_gender,
+		admin_company,
+		admin_mail,
+		admin_phone,
+		admin_reg_date,
+		admin_mod_date
+
+		<if test="admin_id=='Super Admin'">
+			,admin_approval
+		</if>
+
+		)
+		values(#{admin_id},
+		#{admin_pw},#{admin_name},#{admin_gender},#{admin_company}
+		,#{admin_mail},#{admin_phone},now(),now()
+		<if test="admin_id=='Super Admin'">
+			,2
+		</if>
+		)
+	</insert>
+
+	<select id="selectcount" parameterType="String" resultType="int">
+		select count(*) from admin_member where admin_id = #{admin_id}
+	</select>
+
+	<select id="selectById" parameterType="String"
+		resultType="com.office.youdog.admin.member.AdminMemberVo">
+		select * from admin_member where admin_id = #{admin_id}
+	</select>
+
+	<select id="adminselect"
+		parameterType="com.office.youdog.admin.member.AdminMemberVo"
+		resultType="com.office.youdog.admin.member.AdminMemberVo">
+		select *
+		from admin_member where admin_id = #{admin_id} and
+		admin_approval > 0
+	</select>
+
+	<update id="adminaccountupdate" parameterType="map">
+		update
+		admin_member
+		set
+		admin_name = #{admin_name}
+		, admin_gender = #{admin_gender}
+		, admin_company = #{admin_company}
+		, admin_mail = #{admin_mail}
+		, admin_phone = #{admin_phone}
+		, admin_mod_date = now()
+		where admin_no = #{admin_no}
+	</update>
+
+	<select id="adminselectall" resultType="map">
+		select * from
+		admin_member;
+	</select>
+
+	<update id="adminupdate" parameterType="int">
+		update admin_member
+		set admin_approval = 1 where admin_no = #{admin_no}
+	</update>
+
+	<update id="adminupdateDenial" parameterType="int">
+		update admin_member
+		set admin_approval = 0 where admin_no = #{admin_no}
+	</update>
+
+
+</mapper>
+  

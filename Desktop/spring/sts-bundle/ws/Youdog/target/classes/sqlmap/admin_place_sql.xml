@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminplace">
+	<update id="updateRegister" parameterType="int">
+		update
+		wish_youdog_place
+		set
+		hoplace_result = 1
+		,hoplace_result_last_date = now()
+		where hoplace_no = #{hoplace_no}
+	</update>
+
+
+
+
+	<insert id="insertplace" parameterType="map">
+		insert into youdog_place(
+		place_thumbnail,
+		place_name,
+		place_address,
+		place_site,
+		place_call_number,
+		place_cate,
+		place_inout,
+		place_ispn
+		)
+		values(
+		#{place_thumbnail},
+		#{place_name},
+		#{place_address},
+		#{place_site},
+		#{place_call_number},
+		#{place_cate},
+		#{place_inout},
+		#{place_ispn}
+		)
+	</insert>
+
+
+
+
+	<select id="selectByIspn" parameterType="String" resultType="int">
+		select count(*) 
+			from youdog_place 
+		where place_ispn = #{place_ispn}
+	</select>
+
+
+
+
+	<!-- 희망장소 입고 신청 -->
+	<insert id="insertHope" parameterType="map">
+		insert into hope_youdog_place(
+			admin_no,	
+			hoplace_thumbnail,	  		
+			hoplace_name,
+			hoplace_address,		  		
+			hoplace_site,
+			hoplace_call_number,
+			hoplace_cate,
+			hoplace_inout,
+			hoplace_ispn,	   		
+			hoplace_reg_date,	    	
+			hoplace_mod_date,
+			hoplace_result_last_date			
+		)
+		values(
+			#{admin_no},	
+			#{hoplace_thumbnail},	  		
+			#{hoplace_name},
+			#{hoplace_address},		  		
+			#{hoplace_site},
+			#{hoplace_call_number},
+			#{hoplace_cate},
+			#{hoplace_inout},
+			#{hoplace_ispn},	  	   			   
+			now(),	    	
+			now(),
+			now()				
+		)
+	</insert>
+
+
+	<select id="hopeplaceselectall" resultType="map">
+		select * from
+		hope_youdog_place;
+	</select>
+
+
+	<update id="placeupdate" parameterType="int">
+		update hope_youdog_place
+		set hoplace_result = 1 where hoplace_no = #{hoplace_no}
+	</update>
+
+
+	<update id="placeupdateDenial" parameterType="int">
+		update hope_youdog_place
+		set hoplace_result = 0 where hoplace_no = #{hoplace_no}
+	</update>
+
+
+	<select id="placeselectall" resultType="map">
+		select * from
+		youdog_place;
+	</select>
+
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminEvent">
+	<select id="selectEventList" resultType="EventVo">
+		SELECT @rownum:=@rownum+1 as RN, A.* FROM youdog_event A
+		WHERE (@rownum:=0)=0 ORDER BY reg_date DESC, event_no DESC
+	</select>
+
+	<insert id="insertEvent" parameterType="map">
+		insert into youdog_event(
+		event_title,
+		event_thumbnail,
+		event_link
+		)
+		values(
+		#{event_title},
+		#{event_thumbnail},
+		#{event_link}
+		)
+	</insert>
+	
+	<delete id="deleteEvent" parameterType="int">
+		delete from youdog_event where event_no = #{event_no};
+	</delete>
+	
+	<select id="selectEventByNo" parameterType="int" resultType="EventVo">
+		select * from youdog_event where event_no = #{event_no};
+	</select>
+	
+	<update id="modifyEvent" parameterType="EventVo">
+		update youdog_event set
+		event_title = #{event_title}
+		, event_link = #{event_link}
+		<if test="event_thumbnail != null and event_thumbnail != ''">
+			, event_thumbnail = #{event_thumbnail}
+		</if>
+		where event_no = #{event_no}
+	</update>
+</mapper>

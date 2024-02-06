@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userplace">
+
+	<select id="wishPlaceSelectAll" resultType="map">
+	SELECT wyp.wplace_no, yp.place_thumbnail, yp.place_name, yp.place_address, yp.place_site 
+		FROM wish_youdog_place wyp JOIN youdog_place yp ON wyp.PLACE_NO =
+		yp.PLACE_NO WHERE wyp.user_no = #{user_no}; 
+	</select>
+	
+	<delete id="deleteUserWishPlace" parameterType="int">
+		DELETE 
+		FROM wish_youdog_place 
+		WHERE wplace_no = #{wplace_no};
+	</delete>
+
+	<select id="selectPlaceNoByWplaceNo" parameterType="int" resultType="int">
+		SELECT place_no FROM wish_youdog_place WHERE wplace_no = #{wplace_no}
+	</select>
+
+	<update id="minusPlaceLikes" parameterType="int">
+	 	UPDATE youdog_place SET place_likes = place_likes - 1 WHERE place_no = #{place_no}
+	</update>
+</mapper>

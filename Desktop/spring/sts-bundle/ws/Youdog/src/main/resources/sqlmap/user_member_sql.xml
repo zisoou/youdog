@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<insert id='insert' parameterType="UserMemberVo"
+		useGeneratedKeys="true" keyProperty="user_no">
+		insert into user_member(
+		user_id,
+		user_pw,
+		user_name,
+		user_gender,
+		user_mail,
+		user_phone,
+		user_reg_date,
+		user_mod_date
+		)
+		values(#{user_id},
+		#{user_pw},#{user_name},#{user_gender},
+		#{user_mail},#{user_phone},now(),now())
+	</insert>
+
+
+	<select id="selectOne" parameterType="String"
+		resultType="UserMemberVo">
+		select * from user_member where user_id = #{user_id}
+	</select>
+	<update id="update" parameterType="map">
+		update user_member
+		set
+		user_name = #{user_name}
+		, user_gender = #{user_gender}
+		, user_mail = #{user_mail}
+		, user_phone = #{user_phone}
+		, user_mod_date = now()
+		where user_no = #{user_no}
+	</update>
+
+
+	<select id="findPswSelect" parameterType="UserMemberVo"
+		resultType="UserMemberVo">
+		select *
+		from user_member
+		where user_id = #{user_id}
+		and user_name = #{user_name}
+		and user_mail = #{user_mail}
+	</select>
+
+
+	<update id="updatePsw" parameterType="UserMemberVo">
+		update user_member
+		set user_pw = #{user_pw}
+		where user_id = #{user_id}
+	</update>
+
+
+</mapper>
+  

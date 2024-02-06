@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+  	<typeAliases>
+		<typeAlias type="com.office.youdog.user.member.UserMemberVo" alias="UserMemberVo"/>
+	  	<typeAlias type="com.office.youdog.admin.member.AdminMemberVo" alias="AdminMemberVo"/>
+		<typeAlias type="com.office.youdog.place.PlaceVo" alias="PlaceVo"/>  		
+	  	<typeAlias type="com.office.youdog.place.HopePlaceVo" alias="HopePlaceVo"/>  		
+	  	<typeAlias type="com.office.youdog.place.WishPlaceVo" alias="WishPlaceVo"/> 
+<!-- 	  	<typeAlias type="com.office.youdog.answer.AnswerVo" alias="AnswerVo"/>  -->
+	  	<typeAlias type="com.office.youdog.bulletin.BulletinVo" alias="BulletinVo"/>
+	  	<typeAlias type="com.office.youdog.event.EventVo" alias="EventVo"/>
+  	</typeAliases>
+  </configuration>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="placeSql">
+
+
+	<select id="placeselectall" resultType="map">
+		select * from
+		youdog_place;
+	</select>
+
+
+	<update id="placeLikes" parameterType="int">
+		update youdog_place
+		set place_likes = place_likes + 1 where place_no = #{place_no};
+	</update>
+
+	
+	<update id="placeHates" parameterType="int">
+		update youdog_place
+		set place_likes = place_likes - 1 where place_no = #{place_no};
+	</update>
+	
+	<insert id="insertWishPlace"  >
+	insert into wish_youdog_place(
+		place_no,
+		user_no
+		)
+		values(
+		#{place_no},
+		#{user_no}
+		)
+	</insert>
+	
+	
+	<select id="likeListupPlace" resultType="String">
+        SELECT GROUP_CONCAT(place_no) FROM wish_youdog_place where user_no = #{user_no};
+	</select>
+	
+  	
+	<delete id="deleteWishPlace" parameterType="map">
+		DELETE 
+		FROM wish_youdog_place 
+		WHERE user_no = #{user_no} and place_no = #{place_no};
+	</delete>
+
+</mapper>
